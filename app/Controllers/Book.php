@@ -25,9 +25,15 @@ class Book extends Controller
 
     public function index()
     {
+        $categories = $this->categoryModel->findAll();
+        $recentBooks = $this->bookModel->getBooksWithCategoryAndLanguage(null, null, null);
+        // Ambil hanya 6 buku terbaru
+        $recentBooks = array_slice($recentBooks, 0, 6);
+
         return view('books/index', [
-            'category' => $this->categoryModel->findAll(),
-            'title' => 'KutaBaca',
+            'categories' => $categories,
+            'recentBooks' => $recentBooks,
+            'title' => 'KutaBaca - Koleksi Buku',
         ]);
     }
 
@@ -37,12 +43,8 @@ class Book extends Controller
         $selected_kategori = $this->request->getGet('kategori');
         $selected_language = $this->request->getGet('bahasa');
 
-
         $books = $this->bookModel->getBooksWithCategoryAndLanguage($keyword, $selected_kategori, $selected_language);
         $kategori = $this->categoryModel->findAll();
-
-        // misalnya kamu punya list bahasa tetap
-        $list_bahasa = ['id', 'en'];
 
         return view('books/collection', [
             'books' => $books,
@@ -50,8 +52,32 @@ class Book extends Controller
             'keyword' => $keyword,
             'selected_kategori' => $selected_kategori,
             'selected_language' => $selected_language,
-            'list_bahasa' => $list_bahasa,
             'title' => 'KutaBaca - Koleksi Buku'
+        ]);
+    }
+
+    public function detail($slug)
+    {
+        // Ambil buku berdasarkan slug dengan join kategori
+        $book = $this->bookModel->getBookBySlug($slug);
+
+        if (!$book) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Buku tidak ditemukan.");
+        }
+
+        // Ambil data penulis (jika ada)
+        $authors = [];
+        try {
+            $authors = $this->bookAuthorModel->getAuthorsByBookId($book['id']);
+        } catch (\Exception $e) {
+            // Jika tidak ada penulis, gunakan array kosong
+            $authors = [];
+        }
+
+        return view('books/detail', [
+            'book' => $book,
+            'authors' => $authors,
+            'title' => 'KutaBaca - Detail ' . $book['title']
         ]);
     }
 
@@ -62,7 +88,10 @@ class Book extends Controller
         if (!$book) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Buku tidak ditemukan.");
         }
-        return view('books/read', ['book' => $book]);
+        return view('books/read', [
+            'book' => $book,
+            'title' => 'KutaBaca - ' . $book['title']
+        ]);
     }
 
     public function create()

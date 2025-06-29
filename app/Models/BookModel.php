@@ -28,7 +28,8 @@ class BookModel extends Model
     {
         $builder = $this->db->table('books b')
             ->select('b.*, c.name AS category_name')
-            ->join('category c', 'b.category = c.id', 'left');
+            ->join('category c', 'b.category = c.id', 'left')
+            ->orderBy('b.created_at', 'DESC');
 
         if ($keyword) {
             $builder->groupStart()
@@ -47,5 +48,15 @@ class BookModel extends Model
         }
 
         return $builder->get()->getResultArray();
+    }
+
+    public function getBookBySlug($slug)
+    {
+        return $this->db->table('books b')
+            ->select('b.*, c.name AS category_name')
+            ->join('category c', 'b.category = c.id', 'left')
+            ->where('b.slug', $slug)
+            ->get()
+            ->getRowArray();
     }
 }

@@ -5,90 +5,90 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title; ?></title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="<?= base_url('assets/img/logo-kutabaca.png') ?>">
+    <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/img/logo-kutabaca.png') ?>">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 </head>
 
 <body>
-    <div class="content-wrapper flex-grow-1">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">KutaBaca</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">Beranda</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Kategori Buku
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Buku Pelajaran</a></li>
-                                <li><a class="dropdown-item" href="#">Buku Cerita</a></li>
-                                <li><a class="dropdown-item" href="#">Buku Pengetahuan Umum</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Petunjuk
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Untuk Siswa</a></li>
-                                <li><a class="dropdown-item" href="#">Untuk Guru</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <a class="btn btn-outline-info d-flex" href="/login">Admin</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="<?= base_url('/') ?>">
+                <img src="<?= base_url('assets/img/logo-kutabaca.png') ?>" alt="Logo" style="height: 40px;" class="me-2">
+                <span class="fw-bold text-dark">KutaBaca</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                </div>
-            </div>
-        </nav>
-
-        <?= $this->renderSection('content'); ?>
-        <!-- Isi konten kamu di sini -->
-    </div>
-
-    <footer class="bg-light text-center text-lg-start mt-5 border-top">
-        <div class="container p-4">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">KutaBaca: Perpustakaan Digital Offline</h5>
-                    <p>Media belajar interaktif berbasis digital untuk Desa Kutamanah.</p>
-                    <div class="footer-logos d-flex align-items-center">
-                        <img src="<?= base_url('assets/img/logo-upi.png') ?>" alt="Logo UPI">
-                        <img src="<?= base_url('assets/img/logo-kutamanah.png') ?>" alt="Logo Desa Kutamanah">
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Menu</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="/" class="text-dark">Beranda</a></li>
-                        <li><a href="#" class="text-dark">Tentang</a></li>
-                        <li><a href="#" class="text-dark">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Kontak</h5>
-                    <p>Email: mkb@upi.edu</p>
-                </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="<?= base_url('/') ?>"><i class="bi bi-house-door"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-journals"></i> Kategori Buku
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= base_url('books?kategori=1') ?>">Buku Pelajaran</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('books?kategori=2') ?>">Buku Cerita</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('books?kategori=3') ?>">Buku Pengetahuan Umum</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="<?= base_url('books') ?>">Semua Kategori</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-info-circle"></i> Petunjuk
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= base_url('petunjuk/siswa') ?>">Untuk Siswa</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('petunjuk/guru') ?>">Untuk Guru</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-info" href="<?= base_url('login') ?>"><i class="bi bi-person-gear"></i> Admin</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <div class="text-center p-3 bg-danger text-white">
-            &copy; <?= date('Y') ?> KutaBaca. All rights reserved.
+    <!-- Main Content -->
+    <main class="container my-4">
+        <?= $this->renderSection('content'); ?>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer border-top py-4">
+        <div class="container small text-center">
+            <div>KutaBaca - Perpustakaan Digital Offline untuk Desa Kutamanah</div>
+            <div class="mt-2">
+                &copy; <?= date('Y') ?> KutaBaca. All rights reserved.
+            </div>
+            <div class="d-flex justify-content-center mt-3 gap-3">
+                <img src="<?= base_url('assets/img/logo-upi.png') ?>" alt="Logo UPI" height="30">
+                <img src="<?= base_url('assets/img/logo-kutamanah.png') ?>" alt="Logo Desa Kutamanah" height="30">
+            </div>
         </div>
     </footer>
 
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/popper.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+    <!-- Bootstrap JS Bundle & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('assets/js/main.js') ?>"></script>
 </body>
 
 </html>
