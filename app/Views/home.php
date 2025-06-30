@@ -14,8 +14,8 @@
                         <span class="hero-emoji">📖</span>
                     </h1>
                     <p class="hero-description">
-                        Perpustakaan Digital Offline untuk Desa Kutamanah. 
-                        Temukan ribuan buku menarik untuk menambah pengetahuan 
+                        Perpustakaan Digital Offline untuk Desa Kutamanah.
+                        Temukan ratusan buku menarik untuk menambah pengetahuan
                         dan wawasan kamu!
                     </p>
 
@@ -90,9 +90,9 @@
             <?php
             $bookCount = 0;
             foreach ($recentBooks as $book):
-                if ($bookCount >= 6) break; // Hanya tampilkan 6 buku
+                if ($bookCount >= 8) break; // Hanya tampilkan 6 buku
             ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <a href="<?= base_url('books/detail/' . $book['slug']) ?>" class="text-decoration-none">
                         <div class="card h-100 shadow-sm book-card">
                             <div class="book-cover-container">
