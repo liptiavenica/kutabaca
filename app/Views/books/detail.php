@@ -84,30 +84,36 @@
                         <p class="description-text"><?= nl2br(esc($book['description'])) ?></p>
                     </div>
                 <?php endif; ?>
+<!-- Tombol Aksi -->
+<div class="book-detail-actions d-flex flex-wrap gap-2 mb-4">
+    <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary d-flex align-items-center gap-2 px-4">
+        <i class="bi bi-book-open"></i> Baca Buku
+    </a>
 
-                <!-- Tombol Aksi -->
-                <div class="book-detail-actions d-flex flex-wrap gap-2 mb-4">
-                    <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary btn-lg">
-                        <i class="bi bi-book-open me-2"></i>Baca Buku
-                    </a>
+    <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
+        <a href="<?= base_url('books/edit/' . $book['id']) ?>"
+           class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">
+            <i class="bi bi-pencil-fill"></i> Ubah Buku
+        </a>
 
-                    <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
-                        <a href="<?= base_url('books/edit/' . $book['id']) ?>" class="btn btn-outline-warning btn-lg">
-                            <i class="bi bi-pencil-square me-1"></i> Ubah Buku
-                        </a>
-                        <form action="<?= base_url('books/delete/' . $book['id']) ?>" method="post" onsubmit="return confirm('Yakin ingin menghapus buku ini?');" style="display: inline;">
-                            <?= csrf_field(); ?>
-                            <button type="submit" class="btn btn-outline-danger btn-lg">
-                                <i class="bi bi-trash me-1"></i> Hapus Buku
-                            </button>
-                        </form>
-                    <?php endif; ?>
+        <form action="<?= base_url('books/delete/' . $book['id']) ?>" method="post" onsubmit="return confirm('Yakin ingin menghapus buku ini?');" style="display: inline;">
+            <?= csrf_field(); ?>
+            <button type="submit"
+                    class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">
+                <i class="bi bi-trash-fill"></i> Hapus Buku
+            </button>
+        </form>
+    <?php endif; ?>
+</div>
 
-                    <a href="<?= base_url('books') ?>" class="btn btn-outline-primary btn-lg">
-                        <i class="bi bi-arrow-left me-2"></i>Kembali ke Koleksi
-                    </a>
-                </div>
+<!-- Tombol Kembali -->
+<div class="book-detail-actions d-flex flex-wrap gap-2 mb-4">
+    <a href="<?= base_url('books') ?>" class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">
+        <i class="bi bi-arrow-left"></i> Kembali ke Koleksi
+    </a>
+</div>
 
+                            
                 <!-- Informasi Tambahan -->
                 <div class="book-detail-footer">
                     <small class="text-muted">

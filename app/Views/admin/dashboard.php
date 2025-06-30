@@ -15,7 +15,11 @@
             <i class="bi bi-plus-lg me-1"></i> Tambah Buku
         </a>
     </div>
-
+    <div class="text-center mt-4">
+            <a href="<?= base_url('books') ?>" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-collection me-2"></i>Lihat Semua Buku
+            </a>
+        </div>
     <div class="row g-4 mt-4">
         <div class="col-md-4">
             <div class="card shadow-sm">
