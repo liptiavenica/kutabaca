@@ -46,6 +46,29 @@
 <!-- Flipbook CSS -->
 <link rel="stylesheet" href="<?= base_url('assets/flipbook/css/flipbook.css') ?>">
 
+<style>
+    #flipbook {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+    }
+    #flipbook .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin: 0;
+        padding: 0;
+    }
+    .container-fluid {
+        overflow-x: hidden;
+    }
+</style>
+
 <script>
     const url = "<?= base_url('uploads/books/' . $book['book_file']) ?>";
     const container = document.getElementById('flipbook');
@@ -222,6 +245,27 @@
             currentScale -= scaleStep;
             $('#flipbook .page canvas').css('transform', `scale(${currentScale})`);
         }
+    });
+
+    // Responsive resize for flipbook
+    function resizeFlipbook() {
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            pdf.getPage(1).then(page => {
+                const viewport = page.getViewport({ scale: 1 });
+                const ratio = viewport.width / viewport.height;
+                const screenW = Math.min(window.innerWidth * 0.98, 1200);
+                const pageW = screenW / 2;
+                const pageH = pageW / ratio;
+                container.style.width = screenW + "px";
+                container.style.height = pageH + "px";
+                if ($('#flipbook').data('turn')) {
+                    $('#flipbook').turn('size', screenW, pageH);
+                }
+            });
+        });
+    }
+    window.addEventListener('resize', function() {
+        resizeFlipbook();
     });
 </script>
 

@@ -116,7 +116,7 @@
         <!-- Logo -->
         <div class="row justify-content-center mb-5">
             <div class="col-md-6 text-center">
-                <img src="<?= base_url('assets/img/logo-kutabaca.png') ?>" alt="Logo KutaBaca" class="img-fluid" style="max-height: 200px;">
+                <img src="<?= base_url('assets/img/logo-kutabaca.png') ?>" alt="Logo KutaBaca" class="img-fluid hero-logo" style="max-height: 200px;">
             </div>
         </div>
 
@@ -163,16 +163,16 @@
 
                 <!-- Siapa di Balik KutaBaca -->
                 <div class="mb-5 p-4 content-card">
-                    <h2 class="fw-bold text-primary-brown mb-4">Tim Kami</h2>
-                    <div class="about-description">
-                        <p class="mb-4">
-                            KutaBaca digerakkan oleh sekelompok mahasiswa dan profesional muda dari berbagai latar belakang disiplin ilmu yang memiliki kesamaan visi tentang pentingnya pemerataan akses pendidikan. Tim kami terdiri dari pengembang perangkat lunak, desainer, ahli pendidikan, dan relawan literasi yang bekerja dengan penuh dedikasi.
+                    <h2 class="fw-bold text-primary-brown mb-4">Tim Pengabdian</h2>
+                    <div class="about-description text-justify">
+                        <p class="mb-4 text-justify">
+                            <strong>KutaBaca</strong> digerakkan oleh tim pengabdian masyarakat dari <strong>Program Studi Mekatronika dan Kecerdasan Buatan (MKB)</strong> Universitas Pendidikan Indonesia Kampus Purwakarta, bekerja sama dengan <strong>Program Studi Pendidikan Sistem dan Teknologi Informasi (PSTI)</strong>.
                         </p>
-                        <p class="mb-4">
-                            Kami percaya bahwa teknologi, ketika dirancang dengan pemahaman mendalam tentang kebutuhan lokal, dapat menjadi alat transformatif yang membuka pintu pengetahuan bagi masyarakat di daerah terpencil.
+                        <p class="mb-4 text-justify">
+                            Tim ini terdiri dari <strong>mahasiswa dan dosen</strong> dari kedua program studi yang memiliki kepedulian terhadap akses pendidikan di daerah terpencil. Kolaborasi lintas keilmuan ini mencakup pengembang perangkat lunak, desainer antarmuka, praktisi pendidikan, serta relawan literasi, yang bersatu dalam visi memajukan pemerataan akses informasi dan teknologi di Indonesia.
                         </p>
-                        <p>
-                            Proyek ini dikelola secara nirlaba dan terbuka untuk kolaborasi dengan berbagai pihak yang memiliki semangat sama dalam memajukan pendidikan Indonesia.
+                        <p class="mb-4 text-justify">
+                            Kami meyakini bahwa teknologi yang dikembangkan dengan memahami konteks lokal dapat menjadi kunci untuk membuka jendela ilmu bagi masyarakat yang selama ini belum terjangkau oleh sumber belajar modern.
                         </p>
                     </div>
 
@@ -181,7 +181,7 @@
                         <h4 class="text-center mb-4 fw-bold text-primary-brown">Anggota Tim</h4>
                         <div class="team-slider-container">
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team1.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <img src="<?= base_url('assets/img/team1.jpg') ?>" alt="Nama Anggota" class="team-member-img">
                                 <h5 class="team-member-name">Nama</h5>
                                 <p class="team-member-role">Dosen</p>
                             </div>
@@ -202,6 +202,26 @@
                             </div>
                             <div class="team-member">
                                 <img src="<?= base_url('assets/img/team/team5.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Nama</h5>
+                                <p class="team-member-role">Mahasiswa</p>
+                            </div>
+                            <div class="team-member">
+                                <img src="<?= base_url('assets/img/team/team6.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Nama</h5>
+                                <p class="team-member-role">Mahasiswa</p>
+                            </div>
+                            <div class="team-member">
+                                <img src="<?= base_url('assets/img/team/team7.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Nama</h5>
+                                <p class="team-member-role">Mahasiswa</p>
+                            </div>
+                            <div class="team-member">
+                                <img src="<?= base_url('assets/img/team/team8.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Nama</h5>
+                                <p class="team-member-role">Mahasiswa</p>
+                            </div>
+                            <div class="team-member">
+                                <img src="<?= base_url('assets/img/team/team9.jpg') ?>" alt="Nama Anggota" class="team-member-img">
                                 <h5 class="team-member-name">Nama</h5>
                                 <p class="team-member-role">Mahasiswa</p>
                             </div>
