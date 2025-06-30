@@ -59,4 +59,12 @@ class BookModel extends Model
             ->get()
             ->getRowArray();
     }
+    public function countBooksByCategory($categoryId)
+    {
+        return $this->db->table('books')
+            ->where('category', $categoryId)
+            ->countAllResults();
+    }
+    
+
 }
