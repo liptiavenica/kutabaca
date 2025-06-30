@@ -6,7 +6,7 @@
 <div class="container-fluid py-3 bg-light border-bottom mb-3">
     <div class="container d-flex justify-content-between align-items-center">
         <a href="<?= base_url('books') ?>" class="btn btn-outline-primary">
-            <i class="bi bi-arrow-left"></i> Kembali ke Koleksi
+            <i class="bi bi-arrow-left"></i> Kembali ke Detail Buku
         </a>
         <h5 class="m-0 text-primary"><?= esc($book['title']) ?></h5>
         <form class="d-inline-block" id="gotoForm">
