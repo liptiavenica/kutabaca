@@ -29,4 +29,12 @@ class Home extends BaseController
             'recentBooks' => $recentBooks
         ]);
     }
+
+     public function about()
+    {
+        return view('about', [
+            'title' => 'Tentang Kami - KutaBaca'
+        ]);
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Debug\Toolbar\Collectors\Views;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -22,3 +23,4 @@ $routes->get('books/edit/(:num)', 'Book::edit/$1');
 $routes->post('books/update/(:num)', 'Book::update/$1');
 $routes->post('books/delete/(:num)', 'Book::delete/$1');
 $routes->get('/authors/search', 'Author::search');
+$routes->get('about', 'Home::about');
