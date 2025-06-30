@@ -10,21 +10,43 @@ class Auth extends Controller
     public function login()
     {
         helper(['form']);
-        if ($this->request->getMethod() === 'post') {
-            $userModel = new UserModel();
-            $user = $userModel->where('username', $this->request->getPost('username'))->first();
-            if ($user && password_verify($this->request->getPost('password'), $user['password'])) {
-                session()->set('user', $user);
-                return redirect()->to('/books');
-            }
-            return redirect()->back()->with('error', 'Login gagal.');
+
+        if (session()->get('user')) {
+            return redirect()->to('/admin');
         }
-        return view('auth/login');
+
+        if ($this->request->getMethod(true) === 'POST') {
+            $userModel = new UserModel();
+
+            $username = $this->request->getPost('username');
+            $password = $this->request->getPost('password');
+
+            $user = $userModel->where('username', $username)->first();
+
+            if ($user) {
+                if ($user['password'] === $password && $user['role'] === 'admin') {
+                    session()->set('user', [
+                        'id' => $user['id'],
+                        'username' => $user['username'],
+                        'role' => $user['role']
+                    ]);
+                    return redirect()->to('/admin');
+                } else {
+                    return redirect()->back()->with('error', 'Password atau role salah.');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Username tidak ditemukan.');
+            }
+        }
+
+        return view('auth/login', [
+            'title' => 'Login Admin'
+        ]);
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('/login')->with('success', 'Berhasil logout.');
     }
 }
