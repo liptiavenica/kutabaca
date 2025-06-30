@@ -903,5 +903,24 @@ html, body {
     .meta-item i {
         margin-bottom: 5px;
     }
+
+    #flipbook {
+        max-width: 1200px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
+        background: #fff;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        border-radius: 12px;
+        min-height: 600px;
+        transition: max-width 0.3s;
+    }
+
+    .page-input {
+        width: 140px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
 }
 
