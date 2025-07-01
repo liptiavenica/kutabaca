@@ -30,9 +30,9 @@
             </form>
 
             <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
-                <div class="mb-3 text-center">
-                    <a href="<?= base_url('/books/create') ?>" class="btn btn-success btn-lg">
-                        <i class="bi bi-plus-circle me-2"></i>Tambah Buku
+                <div class="mt-4 text-center">
+                    <a href="<?= base_url('books/create') ?>" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plus-lg me-1"></i> Tambah Buku
                     </a>
                 </div>
             <?php endif; ?>
@@ -40,38 +40,46 @@
             <?php if (!empty($books)): ?>
                 <div class="row">
                     <?php foreach ($books as $b): ?>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <a href="<?= base_url('books/detail/' . $b['slug']) ?>" class="text-decoration-none">
-                                <div class="card h-100 shadow-sm book-card">
-                                    <div class="book-cover-container">
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 shadow-sm book-card">
+                                <div class="position-relative book-cover-container">
+                                    <a href="<?= base_url('books/detail/' . $b['slug']) ?>" class="text-decoration-none">
                                         <img src="<?= base_url('uploads/covers/' . ($b['cover_image'] ?? 'default.jpg')) ?>"
                                             alt="<?= esc($b['title']) ?>"
                                             class="card-img-top book-cover">
-                                        <div class="book-overlay">
+                                        <div class="book-overlay d-flex justify-content-center align-items-center">
                                             <i class="bi bi-book-open overlay-icon"></i>
                                         </div>
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title fw-bold book-title"><?= esc($b['title']) ?></h5>
-                                        <p class="card-text text-muted book-category">
-                                            <i class="bi bi-tag-fill me-1"></i> <?= esc($b['category_name'] ?? 'Tanpa Kategori') ?>
-                                        </p>
-                                        <p class="card-text text-muted small">
-                                            <i class="bi bi-translate me-1"></i> <?= esc($b['language'] == 'id' ? 'Indonesia' : 'English') ?>
-                                            <?php if ($b['publisher']): ?>
-                                                <br><i class="bi bi-building me-1"></i> <?= esc($b['publisher']) ?>
-                                            <?php endif; ?>
-                                        </p>
-                                    </div>
+                                    </a>
+
                                     <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
-                                        <div class="card-footer bg-transparent border-0 text-center">
-                                            <a href="<?= base_url('books/delete/' . $b['id']) ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin ingin hapus?')">
-                                                <i class="bi bi-trash me-1"></i>Hapus
+                                        <div class="admin-controls d-flex gap-2 position-absolute top-0 end-0 m-2" style="display: none;">
+                                            <a href="<?= base_url('books/edit/' . $b['id']) ?>" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-pencil-square"></i>
                                             </a>
+                                            <form action="<?= base_url('books/delete/' . $b['id']) ?>" method="post" onsubmit="return confirm('Yakin ingin menghapus buku ini?');">
+                                                <?= csrf_field(); ?>
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     <?php endif; ?>
                                 </div>
-                            </a>
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title fw-bold book-title"><?= esc($b['title']) ?></h5>
+                                    <p class="card-text text-muted book-category">
+                                        <i class="bi bi-tag-fill me-1"></i> <?= esc($b['category_name'] ?? 'Tanpa Kategori') ?>
+                                    </p>
+                                    <p class="card-text text-muted small">
+                                        <i class="bi bi-translate me-1"></i> <?= esc($b['language'] == 'id' ? 'Indonesia' : 'English') ?>
+                                        <?php if ($b['publisher']): ?>
+                                            <br><i class="bi bi-building me-1"></i> <?= esc($b['publisher']) ?>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -83,8 +91,14 @@
                     <small>Coba ubah kata kunci pencarian atau pilih kategori yang berbeda.</small>
                 </div>
             <?php endif; ?>
-
         </div>
     </div>
 </div>
+
+<style>
+    .book-card:hover .admin-controls {
+        display: flex !important;
+    }
+</style>
+
 <?= $this->endSection(); ?>

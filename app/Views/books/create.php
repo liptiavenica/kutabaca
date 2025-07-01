@@ -3,6 +3,12 @@
 <?= $this->section('content'); ?>
 <div class="container my-5">
 
+        <!-- Tombol Kembali di pojok kiri atas -->
+        <div class="col-12 mb-3">
+            <a href="<?= base_url('books') ?>" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i>Kembali ke Koleksi
+            </a>
+        </div>
     <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
         <h1 class="section-header mb-4">➕ Tambah Buku Baru</h1>
 

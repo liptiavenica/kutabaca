@@ -2,6 +2,13 @@
 <?= $this->section('content'); ?>
 
 <div class="container my-5">
+
+        <!-- Tombol Kembali di pojok kiri atas -->
+        <div class="col-12 mb-3">
+            <a href="<?= base_url('books') ?>" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i>Kembali ke Koleksi
+            </a>
+        </div>
     <h1 class="section-header mb-4">✏️ Edit Buku</h1>
 
     <form method="post" enctype="multipart/form-data" action="<?= base_url('/books/update/' . $book['id']) ?>" class="mx-auto" style="max-width: 700px;">
