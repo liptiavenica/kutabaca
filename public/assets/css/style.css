@@ -96,6 +96,62 @@ html, body {
     box-shadow: 0 5px 15px rgba(135, 70, 74, 0.3);
 }
 
+/* Override Bootstrap focus states to match theme colors */
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+    border-color: var(--primary-brown) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:focus-visible {
+    background-color: var(--primary-brown) !important;
+    border-color: var(--primary-brown) !important;
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary:focus-visible {
+    background-color: var(--primary-brown) !important;
+    border-color: var(--primary-brown) !important;
+    color: white !important;
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+}
+
+.btn-outline-info:focus,
+.btn-outline-info:active,
+.btn-outline-info.active,
+.btn-outline-info:focus-visible {
+    background-color: var(--primary-brown) !important;
+    border-color: var(--primary-brown) !important;
+    color: white !important;
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+}
+
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary.active,
+.btn-secondary:focus-visible {
+    background-color: var(--neutral-gray-dark) !important;
+    border-color: var(--neutral-gray-dark) !important;
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+}
+
+.btn-light:focus,
+.btn-light:active,
+.btn-light.active,
+.btn-light:focus-visible {
+    background-color: var(--neutral-gray) !important;
+    border-color: var(--neutral-gray) !important;
+    box-shadow: 0 0 0 0.25rem rgba(135, 70, 74, 0.25) !important;
+}
+
 /* Footer dengan warna anak-anak */
 .footer {
     background: linear-gradient(135deg, var(--neutral-gray) 0%, var(--neutral-gray-light) 100%);
