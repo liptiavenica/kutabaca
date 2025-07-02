@@ -65,6 +65,10 @@ class BookModel extends Model
             ->where('category', $categoryId)
             ->countAllResults();
     }
-    
+    public function countBooks()
+    {
+        return $this->db->table('books')
+            ->countAllResults();
+    }
 
 }
