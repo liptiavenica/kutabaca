@@ -35,6 +35,7 @@
                         <i class="bi bi-plus-lg me-1"></i> Tambah Buku
                     </a>
                 </div>
+                <br>
             <?php endif; ?>
 
             <?php if (!empty($books)): ?>
