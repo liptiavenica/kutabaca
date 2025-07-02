@@ -41,7 +41,7 @@
             <?php if (!empty($books)): ?>
                 <div class="row">
                     <?php foreach ($books as $b): ?>
-                        <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="col-md-6 col-lg-3 mb-4">
                             <div class="card h-100 shadow-sm book-card">
                                 <div class="position-relative book-cover-container">
                                     <a href="<?= base_url('books/detail/' . $b['slug']) ?>" class="text-decoration-none">

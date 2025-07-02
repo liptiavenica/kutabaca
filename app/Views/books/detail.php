@@ -9,7 +9,7 @@
                 <i class="bi bi-arrow-left me-2"></i>Kembali ke Koleksi
             </a>
         </div>
-        <!-- Cover Buku -->
+        <!-- Cover Buku dan Tombol Baca -->
         <div class="col-lg-4 mb-4">
             <div class="book-detail-cover-container">
                 <img src="<?= base_url('uploads/covers/' . ($book['cover_image'] ?? 'default.jpg')) ?>"
@@ -18,6 +18,13 @@
                 <div class="book-detail-overlay">
                     <i class="bi bi-book-open overlay-icon-large"></i>
                 </div>
+            </div>
+            
+            <!-- Tombol Baca di bawah cover -->
+            <div class="text-center mt-3">
+                <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 px-4 w-100">
+                    <i class="bi bi-book-open"></i> Baca Buku
+                </a>
             </div>
         </div>
 
@@ -91,10 +98,6 @@
                 <?php endif; ?>
                 <!-- Tombol Aksi -->
                 <div class="book-detail-actions d-flex flex-wrap gap-2 mb-4">
-                    <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary d-flex align-items-center gap-2 px-4">
-                        <i class="bi bi-book-open"></i> Baca Buku
-                    </a>
-
                     <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
                         <a href="<?= base_url('books/edit/' . $book['id']) ?>"
                         class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">

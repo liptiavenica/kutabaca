@@ -90,9 +90,9 @@
             <?php
             $bookCount = 0;
             foreach ($recentBooks as $book):
-                if ($bookCount >= 6) break; // Hanya tampilkan 6 buku
+                if ($bookCount >= 8) break; // Hanya tampilkan 8 buku (2 baris x 4 buku)
             ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <a href="<?= base_url('books/detail/' . $book['slug']) ?>" class="text-decoration-none">
                         <div class="card h-100 shadow-sm book-card">
                             <div class="book-cover-container">
