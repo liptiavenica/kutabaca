@@ -154,9 +154,21 @@
         const container = document.getElementById('mobile-pdf-container');
         container.innerHTML = ''; // Clear existing content
         
-        // Load all pages
+        // Create array to store page promises
+        const pagePromises = [];
+        
+        // Load all pages in order
         for (let pageNum = 1; pageNum <= mobileTotalPages; pageNum++) {
-            mobilePdf.getPage(pageNum).then(page => {
+            pagePromises.push(
+                mobilePdf.getPage(pageNum).then(page => {
+                    return { page, pageNum };
+                })
+            );
+        }
+        
+        // Wait for all pages to load, then render them in order
+        Promise.all(pagePromises).then(pageData => {
+            pageData.forEach(({ page, pageNum }) => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 
@@ -185,7 +197,7 @@
                     viewport: scaledViewport
                 });
             });
-        }
+        });
     }
 
     // Desktop Flipbook Reader
