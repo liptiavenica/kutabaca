@@ -148,10 +148,16 @@ public function update($id)
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Buku tidak ditemukan.");
     }
 
-    // Data dasar
+    // Buat slug baru
+    helper('text');
+    $newTitle = $this->request->getPost('judul');
+    $newSlug = url_title($newTitle, '-', true);
+
+    // Siapkan data dasar
     $data = [
         'id' => $id,
-        'title' => $this->request->getPost('judul'),
+        'title' => $newTitle,
+        'slug' => $newSlug,
         'description' => $this->request->getPost('deskripsi'),
         'category' => $this->request->getPost('category'),
         'language' => $this->request->getPost('language'),
@@ -161,26 +167,57 @@ public function update($id)
         'year' => $this->request->getPost('year') ?: null,
     ];
 
-    // Cek dan update file buku
+    // Cek apakah judul diubah
+    if ($newSlug !== $book['slug']) {
+        // Rename file PDF
+        if ($book['book_file']) {
+            $oldPdfPath = 'uploads/books/' . $book['book_file'];
+            $newPdfName = $newSlug . '.' . pathinfo($book['book_file'], PATHINFO_EXTENSION);
+            $newPdfPath = 'uploads/books/' . $newPdfName;
+
+            if (file_exists($oldPdfPath)) {
+                rename($oldPdfPath, $newPdfPath);
+                $data['book_file'] = $newPdfName;
+            }
+        }
+
+        // Rename cover image
+        if ($book['cover_image']) {
+            $oldCoverPath = 'uploads/covers/' . $book['cover_image'];
+            $newCoverName = $newSlug . '.' . pathinfo($book['cover_image'], PATHINFO_EXTENSION);
+            $newCoverPath = 'uploads/covers/' . $newCoverName;
+
+            if (file_exists($oldCoverPath)) {
+                rename($oldCoverPath, $newCoverPath);
+                $data['cover_image'] = $newCoverName;
+            }
+        }
+    }
+
+    // Cek apakah ada file PDF baru
     $file = $this->request->getFile('file');
     if ($file && $file->isValid()) {
         // Hapus file lama
-        if (file_exists('uploads/books/' . $book['book_file'])) {
+        if (!empty($book['book_file']) && file_exists('uploads/books/' . $book['book_file'])) {
             unlink('uploads/books/' . $book['book_file']);
         }
-        $filename = $file->getRandomName();
+
+        // Simpan file baru dengan nama slug baru
+        $filename = $newSlug . '.' . $file->getClientExtension();
         $file->move('uploads/books', $filename);
         $data['book_file'] = $filename;
     }
 
-    // Cek dan update cover buku
+    // Cek apakah ada cover image baru
     $cover = $this->request->getFile('cover_image');
     if ($cover && $cover->isValid()) {
         // Hapus cover lama
-        if (file_exists('uploads/covers/' . $book['cover_image'])) {
+        if (!empty($book['cover_image']) && file_exists('uploads/covers/' . $book['cover_image'])) {
             unlink('uploads/covers/' . $book['cover_image']);
         }
-        $coverName = $cover->getRandomName();
+
+        // Simpan cover baru dengan nama slug baru
+        $coverName = $newSlug . '.' . $cover->getClientExtension();
         $cover->move('uploads/covers', $coverName);
         $data['cover_image'] = $coverName;
     }
@@ -252,20 +289,20 @@ public function store()
 
     // Validasi file PDF
     $pdf = $this->request->getFile('file');
-    if (!$pdf->isValid() || $pdf->getSize() > 50 * 1024 * 1024 || $pdf->getClientMimeType() !== 'application/pdf') {
-        return redirect()->back()->with('error', 'File PDF tidak valid atau melebihi ukuran 50MB.');
+    if (!$pdf->isValid() || $pdf->getSize() > 100 * 1024 * 1024 || $pdf->getClientMimeType() !== 'application/pdf') {
+        return redirect()->back()->withInput()->with('error', 'File PDF tidak valid atau melebihi ukuran 100MB.');
     }
 
     // Validasi cover image
     $coverImage = $this->request->getFile('cover_image');
     $allowedImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    if (!$coverImage->isValid() || !in_array($coverImage->getClientMimeType(), $allowedImageTypes)) {
-        return redirect()->back()->with('error', 'Cover harus berupa gambar jpg, jpeg, atau png.');
+    if (!$coverImage->isValid() || $pdf->getSize() > 10 * 1024 * 1024 || !in_array($coverImage->getClientMimeType(), $allowedImageTypes)) {
+        return redirect()->back()->withInput()->with('error', 'Cover harus berupa gambar jpg, jpeg, atau png atau melebihi ukuran 10MB.');
     }
 
     // Buat slug otomatis
     helper('text');
-    $slug = url_title($this->request->getPost('judul'), '-', true);
+    $slug = url_title($this->request->getPost('judul_final'), '-', true);
 
     // Simpan file PDF dengan nama slug.pdf
     $pdfName = $slug . '.' . $pdf->getClientExtension();
@@ -278,7 +315,7 @@ public function store()
 
     // Simpan ke tabel books
     $this->bookModel->save([
-        'title' => $this->request->getPost('judul'),
+        'title' => $this->request->getPost('judul_final'), // GANTI INI
         'slug' => $slug,
         'description' => $this->request->getPost('deskripsi'),
         'book_file' => $pdfName,
@@ -320,6 +357,21 @@ public function store()
     }
 
     return redirect()->to('/books')->with('success', 'Buku berhasil ditambahkan.');
+}
+public function checkTitle()
+{
+    $title = $this->request->getGet('title');
+    $excludeId = $this->request->getGet('exclude');
+
+    $query = $this->bookModel->where('title', $title);
+
+    if ($excludeId) {
+        $query->where('id !=', $excludeId);
+    }
+
+    $book = $query->first();
+
+    return $this->response->setJSON(['exists' => $book ? true : false]);
 }
 
 
