@@ -98,19 +98,23 @@
         <?= $this->renderSection('content'); ?>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer border-top py-4">
-        <div class="container small text-center">
-            <div>KutaBaca - Perpustakaan Digital Offline untuk Desa Kutamanah</div>
-            <div class="mt-2">
-                &copy; <?= date('Y') ?> KutaBaca. All rights reserved.
-            </div>
-            <div class="d-flex justify-content-center mt-3 gap-3">
-                <img src="<?= base_url('assets/img/logo-upi.png') ?>" alt="Logo UPI" height="30">
-                <img src="<?= base_url('assets/img/logo-kutamanah.png') ?>" alt="Logo Desa Kutamanah" height="30">
-            </div>
+   <!-- Footer -->
+<footer class="footer border-top py-4">
+    <div class="container small text-center">
+        <div>KutaBaca - Perpustakaan Digital Offline untuk Desa Kutamanah</div>
+        <div class="mt-2 text-primary">
+            Hubungi kami: <a href="mailto:mkb@upi.edu" class="text-primary">mkb@upi.edu</a>
         </div>
-    </footer>
+        <div class="mt-2">
+            &copy; <?= date('Y') ?> KutaBaca. All rights reserved.
+        </div>
+        <div class="d-flex justify-content-center mt-3 gap-3">
+            <img src="<?= base_url('assets/img/logo-upi.png') ?>" alt="Logo UPI" height="30">
+            <img src="<?= base_url('assets/img/logo-kutamanah.png') ?>" alt="Logo Desa Kutamanah" height="30">
+        </div>
+    </div>
+</footer>
+
 
     <!-- Bootstrap JS Bundle & Custom JS -->
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
