@@ -1,0 +1,126 @@
+:root {
+    --primary-pink-light: #FFD6E0;
+    --accent-yellow: #FFF9C4;
+    --accent-purple: #E1BEE7;
+}
+
+.about-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--primary-pink-light) 0%, var(--accent-yellow) 50%, var(--accent-purple) 100%);
+}
+
+.about-description {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #495057;
+}
+
+.about-description p {
+    margin-bottom: 1.2rem;
+}
+
+.text-primary-brown {
+    color: #5D4037;
+}
+
+.btn-primary {
+    background-color: #5D4037;
+    border-color: #5D4037;
+}
+
+.btn-outline-primary {
+    color: #5D4037;
+    border-color: #5D4037;
+}
+
+.btn-outline-primary:hover {
+    background-color: #5D4037;
+    color: white;
+}
+
+.content-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Team Slider Styles */
+.team-slider {
+    margin: 2rem 0;
+}
+
+.team-member {
+    text-align: center;
+    padding: 1rem;
+}
+
+.team-member-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 0 auto 1rem;
+}
+
+.team-member-name {
+    font-weight: 600;
+    color: #5D4037;
+    margin-bottom: 0.25rem;
+}
+
+.team-member-role {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Tiny Slider Local Styles */
+.tns-outer {
+    position: relative;
+}
+
+.tns-nav {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.tns-nav button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.tns-nav button.tns-nav-active {
+    background: #5D4037;
+}
+
+.tns-controls button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(93, 64, 55, 0.7);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    z-index: 10;
+}
+
+.tns-controls button:first-child {
+    left: 10px;
+}
+
+.tns-controls button:last-child {
+    right: 10px;
+}
+
+.tns-slider {
+    transition: all 0.3s ease;
+}

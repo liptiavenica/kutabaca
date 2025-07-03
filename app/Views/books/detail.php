@@ -1,6 +1,7 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('content'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 <div class="container my-5">
     <div class="row">
         <!-- Tombol Kembali di pojok kiri atas -->
@@ -9,36 +10,85 @@
                 <i class="bi bi-arrow-left me-2"></i>Kembali ke Koleksi
             </a>
         </div>
-        <!-- Cover Buku dan Tombol Baca -->
+
+        <!-- Cover Buku dan Kategori -->
         <div class="col-lg-4 mb-4">
             <div class="book-detail-cover-container">
                 <img src="<?= base_url('uploads/covers/' . ($book['cover_image'] ?? 'default.jpg')) ?>"
-                     alt="<?= esc($book['title']) ?>"
-                     class="book-detail-cover">
+                    alt="<?= esc($book['title']) ?>"
+                    class="book-detail-cover">
                 <div class="book-detail-overlay">
                     <i class="bi bi-book-open overlay-icon-large"></i>
                 </div>
             </div>
-            
-            <!-- Tombol Baca di bawah cover -->
+
+            <!-- Kategori di bawah cover -->
             <div class="text-center mt-3">
-                <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center gap-2 px-4 w-100">
-                    <i class="bi bi-book-open"></i> Baca Buku
-                </a>
+                <span class="category-badge d-flex align-items-center justify-content-center gap-2 px-4 w-100">
+                    <i class="bi bi-tag-fill me-1"></i>
+                    <?= esc($book['category_name'] ?? 'Kategori Umum') ?>
+                </span>
             </div>
         </div>
 
-        <!-- Informasi Buku -->
+        <!-- Informasi Buku dan Tombol Baca -->
         <div class="col-lg-8">
             <div class="book-detail-info">
                 <h1 class="book-detail-title"><?= esc($book['title']) ?></h1>
 
-                <!-- Kategori -->
-                <div class="book-detail-category mb-3">
-                    <span class="category-badge">
-                        <i class="bi bi-tag-fill me-1"></i>
-                        <?= esc($book['category_name'] ?? 'Kategori Umum') ?>
-                    </span>
+                <!-- Container Tombol -->
+                <div class="mb-4 d-flex align-items-center gap-3">
+                    <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
+                        <!-- Tombol Aksi Admin -->
+                        <div class="d-flex gap-2">
+                            <a href="<?= base_url('books/edit/' . $book['id']) ?>"
+                                class="btn btn-outline-primary d-flex align-items-center gap-2 px-3">
+                                <i class="bi bi-pencil-fill"></i> Ubah
+                            </a>
+
+                            <!-- Button Trigger Modal -->
+                            <button type="button" class="btn btn-outline-primary d-flex align-items-center gap-2 px-3" data-bs-toggle="modal" data-bs-target="#deleteBookModal">
+                                <i class="bi bi-trash-fill"></i> Hapus
+                            </button>
+
+                            <!-- Delete Confirmation Modal -->
+                            <div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content" style="border-radius: 12px; border: none;">
+                                        <div class="modal-header" style="border-bottom: none; padding: 1.5rem 1.5rem 0;">
+                                            <h5 class="modal-title text-primary-brown fw-bold" id="deleteBookModalLabel">Konfirmasi Penghapusan</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body px-4 pb-4 pt-0">
+                                            <div class="d-flex align-items-start gap-3">
+                                                <div class="bg-danger bg-opacity-10 p-2 rounded-circle">
+                                                    <i class="bi bi-exclamation-triangle-fill text-danger fs-4"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-1">Anda yakin ingin menghapus buku ini?</p>
+                                                    <p class="text-muted small">"<?= esc($book['title']) ?>" akan dihapus permanen.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="border-top: none; padding: 0 1.5rem 1.5rem;">
+                                            <form action="<?= base_url('books/delete/' . $book['id']) ?>" method="post" class="w-100">
+                                                <?= csrf_field(); ?>
+                                                <div class="d-flex gap-3">
+                                                    <button type="button" class="btn btn-outline-secondary flex-grow-1" data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger flex-grow-1">Ya, Hapus</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Tombol Baca -->
+                    <a href="<?= base_url('books/read/' . $book['slug']) ?>" class="btn btn-primary text-center px-3 ms-auto" style="min-width: 120px;">
+                        <i class="bi bi-book-open me-2"></i> Baca Buku
+                    </a>
                 </div>
 
                 <!-- Informasi Dasar -->
@@ -96,26 +146,8 @@
                         <p class="description-text"><?= nl2br(esc($book['description'])) ?></p>
                     </div>
                 <?php endif; ?>
-                <!-- Tombol Aksi -->
-                <div class="book-detail-actions d-flex flex-wrap gap-2 mb-4">
-                    <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
-                        <a href="<?= base_url('books/edit/' . $book['id']) ?>"
-                        class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">
-                            <i class="bi bi-pencil-fill"></i> Ubah Buku
-                        </a>
-
-                        <form action="<?= base_url('books/delete/' . $book['id']) ?>" method="post" onsubmit="return confirm('Yakin ingin menghapus buku ini?');" style="display: inline;">
-                            <?= csrf_field(); ?>
-                            <button type="submit"
-                                    class="btn btn-outline-primary d-flex align-items-center gap-2 px-4">
-                                <i class="bi bi-trash-fill"></i> Hapus Buku
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
 
 
-                            
                 <!-- Informasi Tambahan -->
                 <div class="book-detail-footer">
                     <small class="text-muted">

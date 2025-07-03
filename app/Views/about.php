@@ -2,106 +2,8 @@
 
 <?= $this->section('content'); ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-
-<style>
-    :root {
-        --primary-pink-light: #FFD6E0;
-        --accent-yellow: #FFF9C4;
-        --accent-purple: #E1BEE7;
-    }
-    
-    .about-section {
-        padding: 3rem 0;
-        background: linear-gradient(135deg, var(--primary-pink-light) 0%, var(--accent-yellow) 50%, var(--accent-purple) 100%);
-    }
-    
-    .about-description {
-        line-height: 1.8;
-        font-size: 1.1rem;
-        color: #495057;
-    }
-    
-    .about-description p {
-        margin-bottom: 1.2rem;
-    }
-    
-    .text-primary-brown {
-        color: #5D4037;
-    }
-    
-    .btn-primary {
-        background-color: #5D4037;
-        border-color: #5D4037;
-    }
-    
-    .btn-outline-primary {
-        color: #5D4037;
-        border-color: #5D4037;
-    }
-    
-    .btn-outline-primary:hover {
-        background-color: #5D4037;
-        color: white;
-    }
-    
-    .content-card {
-        background-color: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(5px);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Team Slider Styles */
-    .team-slider {
-        margin: 2rem 0;
-    }
-    
-    .team-member {
-        text-align: center;
-        padding: 1rem;
-    }
-    
-    .team-member-img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid white;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin: 0 auto 1rem;
-    }
-    
-    .team-member-name {
-        font-weight: 600;
-        color: #5D4037;
-        margin-bottom: 0.25rem;
-    }
-    
-    .team-member-role {
-        color: #6c757d;
-        font-size: 0.9rem;
-    }
-    
-    .tns-nav {
-        text-align: center;
-        margin-top: 1rem;
-    }
-    
-    .tns-nav button {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #ccc;
-        border: none;
-        margin: 0 5px;
-        padding: 0;
-    }
-    
-    .tns-nav button.tns-nav-active {
-        background: #5D4037;
-    }
-</style>
+<link rel="stylesheet" href="<?= base_url('assets/about/css/about.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/about/css/tiny-slider.css') ?>">
 
 <section class="about-section rounded">
     <div class="container-fluid px-lg-5 py-4">
@@ -181,69 +83,59 @@
                         <h4 class="text-center mb-4 fw-bold text-primary-brown">Anggota Tim</h4>
                         <div class="team-slider-container">
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team1.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Dosen</p>
+                                <img src="<?= base_url('assets/img/foto-tim/liptia_kutabaca.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Liptia Venica, S.T., M.T.</h5>
+                                <p class="team-member-role">Dosen MKB</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team2.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/dewi_kutabaca4.jpeg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Dewi Indriati Hadi Putri, S.Pd., M.T.</h5>
+                                <p class="team-member-role">Dosen MKB</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team3.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/ulva_kutabaca.jpeg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Ulva Elviani, S.Kom., M.T.</h5>
+                                <p class="team-member-role">Dosen PSTI</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team4.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/reisa_kutabaca.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Reisa Aulia Sodikin</h5>
+                                <p class="team-member-role">Mahasiswa PSTI 2021</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team5.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/nina_kutabaca.jpeg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Nina Herlina</h5>
+                                <p class="team-member-role">Mahasiswa MKB 2023</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team6.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/aufa_kutabaca.jpg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Aulia Aufa Zahron</h5>
+                                <p class="team-member-role">Mahasiswa MKB 2024</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team7.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/randy_kutabaca.jpeg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Muhammad Randy Kurniawan</h5>
+                                <p class="team-member-role">Mahasiswa MKB 2024</p>
                             </div>
                             <div class="team-member">
-                                <img src="<?= base_url('assets/img/team/team8.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <img src="<?= base_url('assets/img/foto-tim/ariel_kutabaca.jpeg') ?>" alt="Nama Anggota" class="team-member-img">
+                                <h5 class="team-member-name">Ariel Dwika Nugraha</h5>
+                                <p class="team-member-role">Mahasiswa MKB 2024</p>
                             </div>
                             <div class="team-member">
                                 <img src="<?= base_url('assets/img/team/team9.jpg') ?>" alt="Nama Anggota" class="team-member-img">
-                                <h5 class="team-member-name">Nama</h5>
-                                <p class="team-member-role">Mahasiswa</p>
+                                <h5 class="team-member-name">Zaidan Ahmad</h5>
+                                <p class="team-member-role">Mahasiswa MKB 2023</p>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CTA -->
-                <div class="text-center py-4">
-                    <a href="<?= base_url('kontak') ?>" class="btn btn-primary btn-lg px-4 me-3">
-                        <i class="bi bi-envelope me-2"></i> Hubungi Kami
-                    </a>
-                    <a href="<?= base_url('buku') ?>" class="btn btn-primary btn-lg px-4 me-3">
-                        <i class="bi bi-book me-2"></i> Jelajahi Koleksi
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<script src="<?= base_url('assets/about/js/tiny-slider.js') ?>"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var slider = tns({

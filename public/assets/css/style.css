@@ -932,6 +932,25 @@ html, body {
     border-top: 2px solid var(--primary-pink-light);
 }
 
+/* Modal Custom Styles */
+.modal-content {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(5px);
+}
+
+.modal-header .btn-close {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    background-size: 0.8rem;
+}
+
+.modal-footer .btn {
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
 /* Responsive untuk halaman detail */
 @media (max-width: 768px) {
     .book-detail-title {
@@ -979,4 +998,5 @@ html, body {
         padding-right: 12px;
     }
 }
+
 
