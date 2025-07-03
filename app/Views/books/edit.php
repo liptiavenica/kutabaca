@@ -237,7 +237,7 @@
             .then(res => res.json())
             .then(data => {
                 if (data.exists) {
-                    feedback.textContent = 'Judul buku sudah digunakan, silakan gunakan judul lain.';
+                    feedback.textContent = 'Judul buku sudah digunakan. Silakan berikan keterangan tambahan.';
                     disableSubmit('Judul sudah digunakan.');
                 } else {
                     feedback.textContent = '';

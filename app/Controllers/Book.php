@@ -166,6 +166,45 @@ public function update($id)
         'number_of_pages' => $this->request->getPost('number_of_pages') ?: null,
         'year' => $this->request->getPost('year') ?: null,
     ];
+    $validation = \Config\Services::validation();
+
+// Validasi file PDF hanya jika ada file baru
+$pdf = $this->request->getFile('file');
+if ($pdf && $pdf->isValid() && !$pdf->hasMoved()) {
+    if ($pdf->getSize() > 100 * 1024 * 1024 || $pdf->getClientMimeType() !== 'application/pdf') {
+        return redirect()->back()->withInput()->with('error', 'File PDF tidak valid atau melebihi ukuran 100MB.');
+    }
+
+    // Hapus file lama
+    if (!empty($book['book_file']) && file_exists('uploads/books/' . $book['book_file'])) {
+        unlink('uploads/books/' . $book['book_file']);
+    }
+
+    // Simpan file baru
+    $filename = $newSlug . '.' . $pdf->getClientExtension();
+    $pdf->move('uploads/books', $filename);
+    $data['book_file'] = $filename;
+}
+
+// Validasi cover image hanya jika ada file baru
+$coverImage = $this->request->getFile('cover_image');
+if ($coverImage && $coverImage->isValid() && !$coverImage->hasMoved()) {
+    $allowedImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if ($coverImage->getSize() > 10 * 1024 * 1024 || !in_array($coverImage->getClientMimeType(), $allowedImageTypes)) {
+        return redirect()->back()->withInput()->with('error', 'Cover harus berupa gambar jpg, jpeg, atau png dengan ukuran maksimal 10MB.');
+    }
+
+    // Hapus cover lama
+    if (!empty($book['cover_image']) && file_exists('uploads/covers/' . $book['cover_image'])) {
+        unlink('uploads/covers/' . $book['cover_image']);
+    }
+
+    // Simpan cover baru
+    $coverName = $newSlug . '.' . $coverImage->getClientExtension();
+    $coverImage->move('uploads/covers', $coverName);
+    $data['cover_image'] = $coverName;
+}
+
 
     // Cek apakah judul diubah
     if ($newSlug !== $book['slug']) {
@@ -363,7 +402,11 @@ public function checkTitle()
     $title = $this->request->getGet('title');
     $excludeId = $this->request->getGet('exclude');
 
-    $query = $this->bookModel->where('title', $title);
+    // Buat slug pakai helper url_title
+    helper('text');
+    $slug = url_title($title, '-', true);
+
+    $query = $this->bookModel->where('slug', $slug);
 
     if ($excludeId) {
         $query->where('id !=', $excludeId);
