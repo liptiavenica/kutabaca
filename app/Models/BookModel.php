@@ -70,5 +70,15 @@ class BookModel extends Model
         return $this->db->table('books')
             ->countAllResults();
     }
-
+    public function getRecentBooks($limit = 8)
+    {
+        return $this->db->table('books b')
+            ->select('b.*, c.name AS category_name')
+            ->join('category c', 'b.category = c.id', 'left')
+            ->orderBy('b.created_at', 'DESC')
+            ->limit($limit)
+            ->get()
+            ->getResultArray();
+    }
+    
 }

@@ -82,16 +82,11 @@
     </div>
 </div>
 
-<!-- Recent Books Section -->
 <?php if (!empty($recentBooks)): ?>
     <div class="container mb-5">
         <h2 class="section-header">Buku Terbaru</h2>
         <div class="row">
-            <?php
-            $bookCount = 0;
-            foreach ($recentBooks as $book):
-                if ($bookCount >= 8) break; // Hanya tampilkan 8 buku (2 baris x 4 buku)
-            ?>
+            <?php foreach ($recentBooks as $book): ?>
                 <div class="col-md-6 col-lg-3 mb-4">
                     <a href="<?= base_url('books/detail/' . $book['slug']) ?>" class="text-decoration-none">
                         <div class="card h-100 shadow-sm book-card">
@@ -112,10 +107,7 @@
                         </div>
                     </a>
                 </div>
-            <?php
-                $bookCount++;
-            endforeach;
-            ?>
+            <?php endforeach; ?>
         </div>
         <div class="text-center mt-4">
             <a href="<?= base_url('books') ?>" class="btn btn-outline-primary btn-lg">
@@ -124,5 +116,6 @@
         </div>
     </div>
 <?php endif; ?>
+
 
 <?= $this->endSection(); ?>
