@@ -67,6 +67,22 @@
     </div>
 </div>
 
+<!-- Loader Spinner -->
+<div id="pdf-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2000;background:rgba(255,255,255,0.7);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div class="custom-spinner mb-3">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+            <defs>
+                <linearGradient id="brown-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8d5524"/>
+                    <stop offset="100%" stop-color="#c68642"/>
+                </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="28" stroke="url(#brown-gradient)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="140 60"/>
+        </svg>
+    </div>
+    <div style="color:#8d5524;font-weight:600;font-size:1.2rem;letter-spacing:0.5px;">Memuat Buku…</div>
+</div>
+
 <!-- jQuery -->
 <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
 
@@ -100,6 +116,16 @@
     }
     .container-fluid {
         overflow-x: hidden;
+    }
+    .custom-spinner svg {
+        animation: spinner-rotate 1.1s linear infinite;
+        display: block;
+    }
+    @keyframes spinner-rotate {
+        100% { transform: rotate(360deg); }
+    }
+    #pdf-loader {
+        transition: opacity 0.3s;
     }
 </style>
 
@@ -136,28 +162,34 @@
         }
     }
 
+    const loader = document.getElementById('pdf-loader');
+
+    // Show loader
+    function showLoader() {
+        loader.style.display = 'flex';
+    }
+    // Hide loader
+    function hideLoader() {
+        loader.style.display = 'none';
+    }
+
     // Mobile PDF Reader
     function initializeMobileReader() {
+        showLoader();
         pdfjsLib.getDocument(url).promise.then(pdf => {
             mobilePdf = pdf;
             mobileTotalPages = pdf.numPages;
             document.getElementById('totalPages').textContent = mobileTotalPages;
-            
-            // Load all pages for vertical scrolling
             loadAllMobilePages();
         });
     }
 
     function loadAllMobilePages() {
         if (!mobilePdf) return;
-        
+        showLoader();
         const container = document.getElementById('mobile-pdf-container');
-        container.innerHTML = ''; // Clear existing content
-        
-        // Create array to store page promises
+        container.innerHTML = '';
         const pagePromises = [];
-        
-        // Load all pages in order
         for (let pageNum = 1; pageNum <= mobileTotalPages; pageNum++) {
             pagePromises.push(
                 mobilePdf.getPage(pageNum).then(page => {
@@ -165,74 +197,56 @@
                 })
             );
         }
-        
-        // Wait for all pages to load, then render them in order
         Promise.all(pagePromises).then(pageData => {
             pageData.forEach(({ page, pageNum }) => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                
-                // Calculate scale to fit screen width
-                const containerWidth = window.innerWidth - 20; // Account for padding
+                const containerWidth = window.innerWidth - 20;
                 const viewport = page.getViewport({ scale: 1 });
                 const scale = containerWidth / viewport.width;
                 const scaledViewport = page.getViewport({ scale: scale * mobileCurrentScale });
-                
                 canvas.width = scaledViewport.width;
                 canvas.height = scaledViewport.height;
                 canvas.className = 'img-fluid mb-3';
                 canvas.style.maxWidth = '100%';
                 canvas.style.height = 'auto';
-                
-                // Add page number indicator
                 const pageDiv = document.createElement('div');
                 pageDiv.className = 'text-center mb-4';
                 pageDiv.innerHTML = `<small class="text-muted">Halaman ${pageNum}</small>`;
                 pageDiv.appendChild(canvas);
-                
                 container.appendChild(pageDiv);
-                
                 page.render({
                     canvasContext: ctx,
                     viewport: scaledViewport
                 });
             });
+            hideLoader();
         });
     }
 
     // Desktop Flipbook Reader
     function initializeDesktopReader() {
+        showLoader();
         pdfjsLib.getDocument(url).promise.then(pdf => {
             const totalPages = pdf.numPages;
-
             pdf.getPage(1).then(page => {
-                const viewport = page.getViewport({
-                    scale: 1
-                });
+                const viewport = page.getViewport({ scale: 1 });
                 const ratio = viewport.width / viewport.height;
-
                 const screenW = Math.min(window.innerWidth * 0.98, 1200);
                 const pageW = screenW / 2;
                 const pageH = pageW / ratio;
-
                 container.style.width = screenW + "px";
                 container.style.height = pageH + "px";
-
                 const canvasPages = new Array(totalPages);
                 const renderPromises = [];
-
                 for (let i = 1; i <= totalPages; i++) {
                     renderPromises.push(
                         pdf.getPage(i).then(p => {
                             const canvas = document.createElement("canvas");
                             const ctx = canvas.getContext("2d");
-                            const v = p.getViewport({
-                                scale: pageW / viewport.width
-                            });
-
+                            const v = p.getViewport({ scale: pageW / viewport.width });
                             canvas.width = v.width;
                             canvas.height = v.height;
-
                             return p.render({
                                 canvasContext: ctx,
                                 viewport: v
@@ -242,7 +256,6 @@
                         })
                     );
                 }
-
                 Promise.all(renderPromises).then(() => {
                     canvasPages.forEach(c => {
                         const pageDiv = document.createElement("div");
@@ -250,14 +263,12 @@
                         pageDiv.appendChild(c);
                         container.appendChild(pageDiv);
                     });
-
                     if (totalPages % 2 !== 0) {
                         const dummy = document.createElement("div");
                         dummy.classList.add("page");
                         dummy.innerHTML = "&nbsp;";
                         container.appendChild(dummy);
                     }
-
                     $('#flipbook').turn({
                         width: screenW,
                         height: pageH,
@@ -267,6 +278,7 @@
                     });
                     container.dataset.initWidth = screenW;
                     container.dataset.initHeight = pageH;
+                    hideLoader();
                 });
             });
         });
