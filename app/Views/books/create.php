@@ -70,8 +70,8 @@
 
             <!-- Publisher -->
             <div class="mb-3">
-                <label for="publisher" class="form-label">Penerbit *</label>
-                <input type="text" class="form-control" id="publisher" name="publisher" required value="<?= old('publisher') ?>">
+                <label for="publisher" class="form-label">Penerbit </label>
+                <input type="text" class="form-control" id="publisher" name="publisher" value="<?= old('publisher') ?>">
             </div>
 
             <!-- ISBN -->

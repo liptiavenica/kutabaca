@@ -163,7 +163,7 @@ html, body {
     background: linear-gradient(135deg, var(--primary-pink-light) 0%, var(--accent-yellow) 50%, var(--accent-purple) 100%);
     position: relative;
     overflow: hidden;
-    border-radius: 0 0 40px 40px;
+    border-radius: 40px;
     box-shadow: 0 15px 40px rgba(135, 70, 74, 0.15);
     padding: 4rem 0;
     margin-bottom: 3rem;

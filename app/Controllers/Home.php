@@ -19,9 +19,8 @@ class Home extends BaseController
     public function index(): string
     {
         $categories = $this->categoryModel->findAll();
-        $recentBooks = $this->bookModel->getBooksWithCategoryAndLanguage(null, null, null);
+        $recentBooks = $this->bookModel->getRecentBooks();
         // Ambil hanya 6 buku terbaru
-        $recentBooks = array_slice($recentBooks, 0, 6);
         $bookCount = $this->bookModel->countBooks();
         return view('home', [
             'title' => 'KutaBaca - Perpustakaan Digital Offline',

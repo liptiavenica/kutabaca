@@ -80,5 +80,4 @@ class BookModel extends Model
             ->get()
             ->getResultArray();
     }
-    
 }

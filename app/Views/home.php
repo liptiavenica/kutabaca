@@ -14,8 +14,8 @@
                         <span class="hero-emoji">📖</span>
                     </h1>
                     <p class="hero-description">
-                        Perpustakaan Digital Offline untuk Desa Kutamanah. 
-                        Temukan <?= $bookCount; ?> buku menarik untuk menambah pengetahuan 
+                        Perpustakaan Digital Offline untuk Desa Kutamanah.
+                        Temukan <?= $bookCount; ?> buku menarik untuk menambah pengetahuan
                         dan wawasan kamu!
                     </p>
 
