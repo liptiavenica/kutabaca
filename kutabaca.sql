@@ -156,6 +156,10 @@ ALTER TABLE `authors`
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `title` (`title`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD UNIQUE KEY `book_file` (`book_file`),
+  ADD UNIQUE KEY `cover_image` (`cover_image`),
   ADD KEY `uploaded_by` (`uploaded_by`),
   ADD KEY `fk_category` (`category`);
 
