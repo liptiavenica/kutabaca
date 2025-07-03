@@ -24,12 +24,18 @@ class BookModel extends Model
     ];
     protected $useTimestamps = true;
 
-    public function getBooksWithCategoryAndLanguage($keyword = null, $kategoriId = null, $language = null)
+
+    public function getBooksWithCategoryAndLanguage($keyword = null, $kategoriId = null, $language = null, $random = false)
     {
         $builder = $this->db->table('books b')
             ->select('b.*, c.name AS category_name')
-            ->join('category c', 'b.category = c.id', 'left')
-            ->orderBy('b.created_at', 'DESC');
+            ->join('category c', 'b.category = c.id', 'left');
+
+        if ($random) {
+            $builder->orderBy('RAND()');
+        } else {
+            $builder->orderBy('b.created_at', 'DESC');
+        }
 
         if ($keyword) {
             $builder->groupStart()

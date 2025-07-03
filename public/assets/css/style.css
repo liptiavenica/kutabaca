@@ -997,6 +997,26 @@ html, body {
         padding-left: 12px;
         padding-right: 12px;
     }
+
+    .book-card:hover .admin-controls {
+        display: flex !important;
+    }
+    #scrollToTopBtn {
+        left: auto;
+        right: 32px;
+        bottom: 32px;
+    }
+    @media (max-width: 576px) {
+        #scrollToTopBtn {
+            right: auto;
+            left: 16px;
+            bottom: 16px;
+        }
+    }
+    .scroll-to-top-icon {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
 }
 
 

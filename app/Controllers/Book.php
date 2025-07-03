@@ -42,8 +42,9 @@ class Book extends Controller
         $keyword = $this->request->getGet('search');
         $selected_kategori = $this->request->getGet('kategori');
         $selected_language = $this->request->getGet('bahasa');
+        $random = true; // Selalu acak
 
-        $books = $this->bookModel->getBooksWithCategoryAndLanguage($keyword, $selected_kategori, $selected_language);
+        $books = $this->bookModel->getBooksWithCategoryAndLanguage($keyword, $selected_kategori, $selected_language, $random);
         $kategori = $this->categoryModel->findAll();
 
         return view('books/collection', [
