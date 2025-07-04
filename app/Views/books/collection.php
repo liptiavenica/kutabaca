@@ -95,27 +95,24 @@
         </div>
     </div>
 </div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+<i class="bi bi-arrow-up">Kembali Ke Atas
+</i></button>
+<script>// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
 
-<!-- Scroll to Top Button -->
-<button id="scrollToTopBtn" class="btn btn-primary rounded-circle">
-    <i class="bi bi-arrow-up scroll-to-top-icon"></i>
-</button>
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
 
-<script>
-    // Show/hide button on scroll
-    window.addEventListener('scroll', function() {
-        const btn = document.getElementById('scrollToTopBtn');
-        if (window.scrollY > 200) {
-            btn.style.display = 'block';
-        } else {
-            btn.style.display = 'none';
-        }
-    });
-
-    // Scroll to top on click
-    document.getElementById('scrollToTopBtn').addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}</script>
 
 <?= $this->endSection(); ?>
