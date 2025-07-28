@@ -58,11 +58,11 @@
                         <i class="bi bi-info-circle"></i> Petunjuk
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<?= base_url('petunjuk/user') ?>">Petunjuk User</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('panduan/panduan.pdf') ?>" target="_blank">Petunjuk User</a></li>
 
                         <?php if (session()->get('user') && session()->get('user')['role'] === 'admin'): ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="<?= base_url('petunjuk/admin') ?>">Petunjuk Admin</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('panduan/buku-panduan-admin.pdf') ?>"    target="_blank">Petunjuk Admin</a></li>
                         <?php endif; ?>
                     </ul>
                 </li>
