@@ -15,6 +15,7 @@ $routes->get('/books', 'Book::showCollection');
 $routes->get('/books/index', 'Book::index');
 $routes->get('/books/detail/(:any)', 'Book::detail/$1');
 $routes->get('/books/read/(:any)', 'Book::read/$1');
+$routes->get('/books/pdf/(:any)', 'Book::pdf/$1');
 $routes->get('/books/create', 'Book::create');
 $routes->post('/books/store', 'Book::store');
 $routes->get('books/create', 'Book::create');

@@ -94,7 +94,23 @@ class Book extends Controller
             'title' => 'KutaBaca - ' . $book['title']
         ]);
     }
+public function pdf($slug)
+{
+    $book = $this->bookModel->where('slug', $slug)->first();
 
+    if (!$book) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Buku tidak ditemukan.");
+    }
+
+    // Pastikan file ada
+    $pdfPath = FCPATH . 'uploads/books/' . $book['book_file'];
+    if (!file_exists($pdfPath)) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("File PDF tidak ditemukan.");
+    }
+
+    // Redirect langsung ke file PDF
+    return redirect()->to(base_url('uploads/books/' . $book['book_file']));
+}
     public function create()
 {
     if (!session()->get('user') || session()->get('user')['role'] !== 'admin') {
